@@ -22,8 +22,9 @@ export default function Tabbar() {
           }}/>
             <tab.Screen name='Perfil' component={Perfil} options={{
             tabBarLabel: 'Perfil', 
+            headerShown: false,
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="person" size={size} color={color} /> 
+              <Ionicons name="person" size={size}  color={color} /> 
             ),
           }}/>
         </tab.Navigator>
