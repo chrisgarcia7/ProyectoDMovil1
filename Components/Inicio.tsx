@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import Ahorros from  '../Components/Tablero/AhorrosComponent'
 
 
 type Paginas = {
@@ -14,11 +15,17 @@ type Paginas = {
 export default function Inicio() {
 
   const navigation = useNavigation<StackNavigationProp<Paginas>>();
+
+//////////
+
+
+//////////
+
+
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.button} onPress={()=>navigation.navigate('Detalles')}>
-        <Text style={styles.buttonText}>Detalles</Text>
-      </TouchableOpacity>
+      <Ahorros></Ahorros>
     </View>
   )
 }
