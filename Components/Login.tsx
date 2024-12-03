@@ -21,6 +21,7 @@ export default function Login() {
           navigation.navigate('CambioPIN'); 
         } else {
             Alert.alert('Error', 'PIN incorrecto');
+            navigation.navigate('Aplicacion')
         }
       };
   return (

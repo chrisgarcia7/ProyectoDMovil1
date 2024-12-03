@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Inicio from './Inicio';
 import Perfil from './Perfil';
 import { Ionicons } from '@expo/vector-icons';
+import Boton from './Boton';
 
 export default function Tabbar() {
 
@@ -14,7 +15,7 @@ export default function Tabbar() {
 
 
         <tab.Navigator initialRouteName='Inicio'>
-            <tab.Screen name='Inicio' component={Inicio} options={{
+            <tab.Screen name='Inicio' component={Boton} options={{
             tabBarLabel: 'Inicio', 
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="home" size={size} color={color} /> 
