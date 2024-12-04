@@ -1,20 +1,25 @@
 import { View, Text, Alert, FlatList ,StyleSheet, Button} from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { Prestamos } from '../../Modelos/Prestamos';
+import api from '../../Service/api'
+import { MaestroCuentas } from '../../Modelos/MaestroCuentas';
+import { Float } from 'react-native/Libraries/Types/CodegenTypes';
 
 export default function PrestamosComponent() {
-    const [descripcion, setDescripcion]= useState<string>('');
-    const [saldoTotal, serSaldoTotal] = useState<string> ('')
-    const [estado, setEstado]= useState<string> ('')
+  const [descripcion_producto, setDescripcion_producto]= useState<string>('');
+  const [saldo_total, setSaldo_total] = useState<Float> (0)
+  const [estatus_producto, setEstatus_producto]= useState<string> ('')
+  const [id, setId] = useState<number> (0)
 
-  const [prestamos, setPrestamos]= useState([]);
+  const [ahorros, setAhorros]= useState([]);
 
-
-  const getPrestamos = async () =>{
+  const getAhorros = async () =>{
     try {
         
-        //const response= await api.get('prestamos');
-        //setPrestamos(response.data)
+        const response= await api.get('MaestroCuentas');
+        const filtrarProducto = response.data.filter(
+          (item: MaestroCuentas) => item.modulo_producto_cliente === 'PRESTAMOS'
+        );
+        setAhorros(filtrarProducto);
 
     } catch (error) {
         Alert.alert('Error', 'Ocurrio un error' + error)
@@ -22,25 +27,25 @@ export default function PrestamosComponent() {
   }
 
   useEffect(()=>{
-        getPrestamos()
+        getAhorros()
   }, [])
 
   return (
     <View style={styles.container}>
       
     <FlatList 
-      data={prestamos}
-      keyExtractor={(item:Prestamos) => item.idPrestamo.toString()}
+      data={ahorros}
+      keyExtractor={(item:MaestroCuentas) => item.id.toString()}
       renderItem={({item})=>(
         
         <View style={styles.card}>
-            <Text>Producto{ `${item.descripcion}`}</Text>
-            <Text>L. {item.saldoTotal}</Text>
-            <Text>Estado {item.estado} </Text>
+            <Text>Producto: { item.descripcion_producto}</Text>
+            <Text>Saldo Actual L. {item.saldo_total}</Text>
+            <Text>Estado: {item.estatus_producto} </Text>
             <View style={styles.actions}>
                 <Button title='Detalles' onPress={()=>{}}></Button>
             </View>
-            <Text>----------</Text>
+           
         </View>
        
       )}
@@ -76,7 +81,7 @@ const styles = StyleSheet.create({
       borderRadius: 4,
     },
     card: {
-      backgroundColor: '#ffff',
+      //backgroundColor: '#fff',
       padding: 16,
       marginBottom: 8,
       borderRadius: 4,
