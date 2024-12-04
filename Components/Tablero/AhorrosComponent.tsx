@@ -1,4 +1,4 @@
-import { View, Text, Alert, FlatList ,StyleSheet} from 'react-native'
+import { View, Text, Alert, FlatList ,StyleSheet, Button} from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Ahorros } from '../../Modelos/Ahorros';
 
@@ -37,6 +37,10 @@ export default function AhorrosComponent() {
             <Text>Producto{ `${item.descripcion}`}</Text>
             <Text>L. {item.saldoTotal}</Text>
             <Text>Estado {item.estado} </Text>
+            <View style={styles.actions}>
+                <Button title='Detalles' onPress={()=>{}}></Button>
+            </View>
+            <Text>----------</Text>
         </View>
        
       )}
@@ -72,7 +76,7 @@ const styles = StyleSheet.create({
       borderRadius: 4,
     },
     card: {
-      backgroundColor: '#fff',
+      //backgroundColor: '#fff',
       padding: 16,
       marginBottom: 8,
       borderRadius: 4,
