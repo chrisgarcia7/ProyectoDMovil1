@@ -1,11 +1,14 @@
 import { View, Text, Alert, FlatList ,StyleSheet, Button} from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { Ahorros } from '../../Modelos/Ahorros';
+import api from '../../Service/api'
+import { MaestroCuentas } from '../../Modelos/MaestroCuentas';
+import { Float } from 'react-native/Libraries/Types/CodegenTypes';
 
 export default function AhorrosComponent() {
-    const [descripcion, setDescripcion]= useState<string>('');
-  const [saldoTotal, serSaldoTotal] = useState<string> ('')
-  const [estado, setEstado]= useState<string> ('')
+  const [descripcion_producto, setDescripcion_producto]= useState<string>('');
+  const [saldo_total, setSaldo_total] = useState<Float> (0)
+  const [estatus_producto, setEstatus_producto]= useState<string> ('')
+  const [id, setId] = useState<number> (0)
 
   const [ahorros, setAhorros]= useState([]);
 
@@ -13,8 +16,11 @@ export default function AhorrosComponent() {
   const getAhorros = async () =>{
     try {
         
-        //const response= await api.get('ahorros');
-        //setAhorros(response.data)
+        const response= await api.get('MaestroCuentas');
+        const filtrarProducto = response.data.filter(
+          (item: MaestroCuentas) => item.modulo_producto_cliente === 'AHORROS'
+        );
+        setAhorros(filtrarProducto);
 
     } catch (error) {
         Alert.alert('Error', 'Ocurrio un error' + error)
@@ -30,17 +36,17 @@ export default function AhorrosComponent() {
       
     <FlatList 
       data={ahorros}
-      keyExtractor={(item:Ahorros) => item.idAhorro.toString()}
+      keyExtractor={(item:MaestroCuentas) => item.id.toString()}
       renderItem={({item})=>(
         
         <View style={styles.card}>
-            <Text>Producto{ `${item.descripcion}`}</Text>
-            <Text>L. {item.saldoTotal}</Text>
-            <Text>Estado {item.estado} </Text>
+            <Text>Producto: { item.descripcion_producto}</Text>
+            <Text>Saldo Actual L. {item.saldo_total}</Text>
+            <Text>Estado: {item.estatus_producto} </Text>
             <View style={styles.actions}>
                 <Button title='Detalles' onPress={()=>{}}></Button>
             </View>
-            <Text>----------</Text>
+           
         </View>
        
       )}
