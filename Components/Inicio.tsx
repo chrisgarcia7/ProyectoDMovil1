@@ -3,6 +3,8 @@ import React from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import Ahorros from  '../Components/Tablero/AhorrosComponent'
+import Prestamos from  '../Components/Tablero/PrestamosComponent'
+
 
 
 type Paginas = {
@@ -25,7 +27,11 @@ export default function Inicio() {
 
   return (
     <View style={styles.container}>
+      <Text>Ahorros</Text>
       <Ahorros></Ahorros>
+      <Text> </Text>
+      <Text>Prestamos</Text>
+      <Prestamos></Prestamos>
     </View>
   )
 }
