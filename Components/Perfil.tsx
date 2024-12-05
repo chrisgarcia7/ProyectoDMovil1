@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { useContextUsuario } from '../Context/Provider';
 
 type Paginas = {
     Login: undefined;
@@ -10,10 +11,22 @@ type Paginas = {
   };
 
 export default function Perfil() {
-    const [nombre, setNombre] = useState<string>('');
-    const [id, setID] =useState<string>('');
+    const {nombre,setNombre, identidad, setIdentidad, regresarPerfil, setRegresarPerfil} = useContextUsuario();
 
     const navigation = useNavigation<StackNavigationProp<Paginas>>();
+
+    const LogOut = () => {
+        setNombre('');
+        setIdentidad('');
+        navigation.navigate('Login')
+
+    }
+
+    const cambio=() =>{
+        setRegresarPerfil(true);
+        navigation.navigate('CambioPIN')
+
+    }
 
     
 
@@ -28,13 +41,13 @@ export default function Perfil() {
                 </View>
                 <View style={styles.infoRow}>
                     <Text style={styles.label}>ID:</Text>
-                    <Text style={styles.value}>{id}</Text>
+                    <Text style={styles.value}>{identidad}</Text>
                 </View>
             </View>
-      <TouchableOpacity style={styles.button} onPress={()=>navigation.navigate('CambioPIN')}>
+      <TouchableOpacity style={styles.button} onPress={cambio}>
         <Text style={styles.buttonText}>Cambiar PIN</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.buttonlogout} onPress={()=>navigation.navigate('Login') }>
+      <TouchableOpacity style={styles.buttonlogout} onPress={LogOut}>
         <Text style={styles.buttonTextlogout}>Cerrar sesión</Text>
       </TouchableOpacity>
     </View>
