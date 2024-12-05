@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import Ahorros from  '../Components/Tablero/AhorrosComponent'
 import Prestamos from  '../Components/Tablero/PrestamosComponent'
+//import api from '../Service/api'
 
 
 
