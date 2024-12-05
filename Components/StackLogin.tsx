@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Login from './Login';
 import CambioPIN from './CambioPIN';
 import Tabbar from './Tabbar';
+import Perfil from './Perfil';
 
 export default function StackLogin() {
     const Stack = createStackNavigator();
@@ -14,6 +15,7 @@ export default function StackLogin() {
             <Stack.Screen name='Login' options={{ headerShown: false }} component={Login}/>
             <Stack.Screen name='CambioPIN' options={{ headerShown: false }} component={CambioPIN}/>
             <Stack.Screen name='Aplicacion' options={{ headerShown: false }} component={Tabbar}/>
+            <Stack.Screen name='Perfil' options={{ headerShown: false }} component={Perfil}/>
         </Stack.Navigator>
     </NavigationContainer>
   )
