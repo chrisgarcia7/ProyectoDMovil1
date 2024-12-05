@@ -3,27 +3,76 @@ import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import CambioPIN from './CambioPIN'
 import { StackNavigationProp } from '@react-navigation/stack';
+import { useContextUsuario } from '../Context/Provider';
+import axios from 'axios';
+import api from '../Service/api';
 
 type Paginas = {
-    Login: undefined;
-    CambioPIN: undefined;
-    Aplicacion: undefined;
-  };
+  Login: undefined;
+  CambioPIN: undefined;
+  Aplicacion: undefined;
+};
 
 export default function Login() {
-    const [celular,setCelular] = useState<string>('')
-    const [PIN, setPIN] = useState<string>('')
+  const [celular, setCelular] = useState<string>('')
+  const [PIN, setPIN] = useState<string>('')
 
-    const navigation = useNavigation<StackNavigationProp<Paginas>>();
+  const { nombre, setNombre, identidad, setIdentidad, id, setID } = useContextUsuario();
 
-    const handleLogin = () => {
-        if (PIN === '12345') {
-          navigation.navigate('CambioPIN'); 
-        } else {
-            Alert.alert('Error', 'PIN incorrecto');
-            navigation.navigate('Aplicacion')
+  const navigation = useNavigation<StackNavigationProp<Paginas>>();
+
+  const handleLogin = async () => {
+
+    try {
+      if (!celular || !PIN) {
+        Alert.alert('Error', 'Por favor ingresa todos los campos');
+        return;
+      }
+      else {
+        let pindb = parseInt(PIN)
+
+
+        const response = await api.post('apppin', { celular, pindb });
+
+        if (response.status === 200) {
+          if (pindb == 1234) {
+            const { nombreres, identidadres, idres } = response.data;
+            setID(idres)
+            navigation.navigate('CambioPIN');
+
+
+          } else {
+
+            const { nombreres, identidadres, idres } = response.data;
+
+            setNombre(nombreres);
+            setIdentidad(identidadres);
+            setID(idres);
+
+            alert('Inicio de sesión exitoso');
+            navigation.navigate('Aplicacion');
+
+          }
+
+
+
         }
-      };
+
+
+
+      }
+
+
+
+    } catch (error) {
+      // Si hay un error, mostrar el mensaje
+      alert('Error, Credenciales incorrectas o servidor no disponible');
+      console.error(error);
+    }
+
+
+
+  };
   return (
 
       <SafeAreaView style={styles.container}>
