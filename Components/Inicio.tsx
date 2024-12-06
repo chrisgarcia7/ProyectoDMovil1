@@ -1,10 +1,13 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import React from 'react'
+import React, { Children } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import Ahorros from  '../Components/Tablero/AhorrosComponent'
 import Prestamos from  '../Components/Tablero/PrestamosComponent'
+import { useContextUsuario } from '../Context/Provider';
+import Login from './Login';
 //import api from '../Service/api'
+
 
 
 
@@ -17,6 +20,8 @@ type Paginas = {
 
 export default function Inicio() {
 
+  const {nombre} = useContextUsuario()
+
   const navigation = useNavigation<StackNavigationProp<Paginas>>();
 
 //////////
@@ -28,10 +33,12 @@ export default function Inicio() {
 
   return (
     <View style={styles.container}>
-      <Text>Ahorros</Text>
+      <Text>Bienvenid@: {nombre}</Text>
+      <Text>{}</Text>
+      <Text style={styles.textTitle}>Ahorros</Text>
       <Ahorros></Ahorros>
       <Text> </Text>
-      <Text>Prestamos</Text>
+      <Text style={styles.textTitle}>Prestamos</Text>
       <Prestamos></Prestamos>
     </View>
   )
@@ -46,6 +53,13 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 36,
+    fontWeight: 'bold',
+    color: '#003366', 
+    textAlign: 'center',
+    marginBottom: 40,
+  },
+  textTitle: {
+    //fontSize: 18,
     fontWeight: 'bold',
     color: '#003366', 
     textAlign: 'center',
