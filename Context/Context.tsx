@@ -8,5 +8,10 @@ export const contextousuario = createContext({
     id:0,
     setID: (id:number)=>{},
     regresarPerfil:false,
-    setRegresarPerfil: (regresarPerfil:boolean) =>{}
+    setRegresarPerfil: (regresarPerfil:boolean) =>{},
+    cod_cliente:0,
+    setCod_cliente:(cod_cliente:number)=>{},
+    nro_producto_cliente:0,
+    setNro_producto_cliente:(nro_producto_cliente:number)=>{}
+
 })

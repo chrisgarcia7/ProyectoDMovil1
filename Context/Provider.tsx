@@ -11,6 +11,9 @@ export default function Provider({children}: ViewReact) {
     const[identidad,setIdentidad]=useState<string>('');
     const[id,setID]=useState<number>(0);
     const[regresarPerfil, setRegresarPerfil]=useState<boolean>(false);
+    const[cod_cliente, setCod_cliente]=useState<number>(0);
+    const[nro_producto_cliente,setNro_producto_cliente]=useState<number>(0);
+    
   return (
     <contextousuario.Provider value={{
         nombre,
@@ -20,7 +23,11 @@ export default function Provider({children}: ViewReact) {
         id,
         setID,
         regresarPerfil,
-        setRegresarPerfil
+        setRegresarPerfil,
+        cod_cliente,
+        setCod_cliente,
+        nro_producto_cliente,
+        setNro_producto_cliente
     }}>
         {children}
     </contextousuario.Provider>
