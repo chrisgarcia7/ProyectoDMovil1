@@ -48,6 +48,7 @@ exports.putPin = async (req,resp) =>{
         if (!usuario){
         }else{
             await usuario.update({pin: newPIN});
+            resp.status(200).send("actualizado correctamente")
 
 
         }

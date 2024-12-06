@@ -35,7 +35,7 @@ export default function Login() {
         const response = await api.post('apppin', { celular, pindb });
 
         if (response.status === 200) {
-          if (pindb == 1234) {
+          if (pindb == 12345) {
             const { nombreres, identidadres, idres } = response.data;
             setID(idres)
             navigation.navigate('CambioPIN');

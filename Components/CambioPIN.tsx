@@ -24,13 +24,34 @@ export default function CambioPIN() {
     if (!oldPIN || !newPIN) {
       alert('Error, Por favor ingresa ambos PINs');
       return;
-    } else {
+    } else if (newPIN.length<5){
+      alert('El nuevo pin tiene que tener mas de 4 caracteres')
+      return;
+    } else if(newPIN==oldPIN){
+      alert('el nuevo pin tiene que ser diferente al anterior pin')
+    }else if(newPIN=='12345'){
+      alert('el pin no puede ser igual a 12345')
+    }else{
+
+
+
+
       try {
+        console.log('esta llegando al try')
         const response = await api.put(`apppin/${id}`, { id, oldPIN, newPIN })
         if (response.status === 200) {
+          console.log('cambio de pin')
           alert('PIN cambiado exitosamente');
-          setRegresarPerfil(false)
-          navigation.navigate('Login');
+          if (regresarPerfil==true){
+            console.log('llego al if si el regresarPerfil es true', regresarPerfil)
+            navigation.navigate('Perfil');
+            setRegresarPerfil(false);
+          }else{
+            console.log('llego al if si el regresarPerfil es false', regresarPerfil)
+            navigation.navigate('Login');
+
+          }
+          
         } else {
           alert('PIN incorrecto')
         }
