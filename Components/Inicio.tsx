@@ -5,10 +5,6 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import Ahorros from  '../Components/Tablero/AhorrosComponent'
 import Prestamos from  '../Components/Tablero/PrestamosComponent'
 import { useContextUsuario } from '../Context/Provider';
-import Login from './Login';
-//import api from '../Service/api'
-
-
 
 
 type Paginas = {
@@ -18,27 +14,23 @@ type Paginas = {
   Detalles: undefined;
 };
 
+
 export default function Inicio() {
 
-  const {nombre} = useContextUsuario()
+  const {nombre, cod_cliente} = useContextUsuario()
+
 
   const navigation = useNavigation<StackNavigationProp<Paginas>>();
 
-//////////
-
-
-//////////
-
-
-
   return (
     <View style={styles.container}>
-      <Text>Bienvenid@: {nombre}</Text>
-      <Text>{}</Text>
-      <Text style={styles.textTitle}>Ahorros</Text>
+      <Text style={styles.textTitle}>Bienvenido: {nombre}</Text>
+      <Text style={styles.textTitle}>Codigo de Cliente: {cod_cliente}</Text>
+      <Text> </Text>
+      <Text style={styles.textAhorro}>Ahorros</Text>
       <Ahorros></Ahorros>
       <Text> </Text>
-      <Text style={styles.textTitle}>Prestamos</Text>
+      <Text style={styles.textPrestamo}>Prestamos</Text>
       <Prestamos></Prestamos>
     </View>
   )
@@ -63,7 +55,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#003366', 
     textAlign: 'center',
-    marginBottom: 40,
+    //marginBottom: 40,
+  },
+  textAhorro: {
+    //fontSize: 18,
+    fontWeight: 'bold',
+    color: '#abcf6b', 
+    marginTop: 15,
+  },
+  textPrestamo: {
+    //fontSize: 18,
+    fontWeight: 'bold',
+    color: '#c58a90', 
+    //marginBottom: 40,
   },
   input: {
     height: 50,

@@ -15,9 +15,6 @@ export default function Provider({children}: ViewReact) {
     const[cod_cliente, setCod_cliente]=useState<number>(0);
     const[nro_producto_cliente,setNro_producto_cliente]=useState<number>(0);
 
-    
-    useEffect(()=>{
-    },[nombre]);
 
     
   return (
