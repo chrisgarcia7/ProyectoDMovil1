@@ -32,8 +32,8 @@ exports.login = async (req,res) =>{
         res.status(200).json({
             nombreres: pinRegistro.nombre_de_cliente,
             identidadres: pinRegistro.nro_identidad,
-            idres: pinRegistro.id
-
+            idres: pinRegistro.id,
+            codigo_clienteres: pinRegistro.cod_cliente,
         });
     } catch (error) {
     }
@@ -48,6 +48,7 @@ exports.putPin = async (req,resp) =>{
         if (!usuario){
         }else{
             await usuario.update({pin: newPIN});
+            resp.status(200).send("actualizado correctamente")
 
 
         }
