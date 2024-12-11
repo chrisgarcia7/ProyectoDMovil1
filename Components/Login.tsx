@@ -17,7 +17,7 @@ export default function Login() {
   const [celular, setCelular] = useState<string>('')
   const [PIN, setPIN] = useState<string>('')
 
-  const { nombre, setNombre, identidad, setIdentidad, id, setID } = useContextUsuario();
+  const { nombre, setNombre, identidad, setIdentidad, id, setID, cod_cliente, setCod_cliente } = useContextUsuario();
 
   const navigation = useNavigation<StackNavigationProp<Paginas>>();
 
@@ -36,57 +36,46 @@ export default function Login() {
 
         if (response.status === 200) {
           if (pindb == 12345) {
-            const { nombreres, identidadres, idres } = response.data;
+            const { nombreres, identidadres, idres, codigo_clienteres } = response.data;
             setID(idres)
             navigation.navigate('CambioPIN');
 
 
           } else {
 
-            const { nombreres, identidadres, idres } = response.data;
+            const { nombreres, identidadres, idres, codigo_clienteres } = response.data;
 
             setNombre(nombreres);
             setIdentidad(identidadres);
             setID(idres);
+            setCod_cliente(codigo_clienteres);
 
             alert('Inicio de sesión exitoso');
             navigation.navigate('Aplicacion');
 
           }
 
-
-
         }
-
-
 
       }
 
-
-
     } catch (error) {
-      // Si hay un error, mostrar el mensaje
       alert('Error, Credenciales incorrectas o servidor no disponible');
       console.error(error);
     }
-
 
 
   };
   return (
 
       <SafeAreaView style={styles.container}>
-
       <Text style={styles.header}>Bienvenido</Text>
       <TextInput placeholder='Numero de Celular' style={styles.input} value={celular} onChangeText={setCelular}></TextInput>
       <TextInput placeholder='PIN' value={PIN} style={styles.input} onChangeText={setPIN} secureTextEntry></TextInput>
-
-
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Iniciar Sesión</Text>
       </TouchableOpacity>
       </SafeAreaView>
-
   )
 }
 

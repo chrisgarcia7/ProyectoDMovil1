@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import api from '../../Service/api'
 import { MaestroCuentas } from '../../Modelos/MaestroCuentas';
 import { Float } from 'react-native/Libraries/Types/CodegenTypes';
+import { useContextUsuario } from '../../Context/Provider';
 
 export default function PrestamosComponent() {
   const [descripcion_producto, setDescripcion_producto]= useState<string>('');
@@ -10,16 +11,19 @@ export default function PrestamosComponent() {
   const [estatus_producto, setEstatus_producto]= useState<string> ('')
   const [id, setId] = useState<number> (0)
 
-  const [ahorros, setAhorros]= useState([]);
+  const [prestamos, setPrestamos]= useState([]);
 
-  const getAhorros = async () =>{
+  const {cod_cliente} = useContextUsuario()  
+
+
+  const getPrestamos = async () =>{
     try {
         
         const response= await api.get('MaestroCuentas');
         const filtrarProducto = response.data.filter(
-          (item: MaestroCuentas) => item.modulo_producto_cliente === 'PRESTAMOS'
+          (item: MaestroCuentas) => item.modulo_producto_cliente === 'PRESTAMOS' && item.cod_cliente === cod_cliente
         );
-        setAhorros(filtrarProducto);
+        setPrestamos(filtrarProducto);
 
     } catch (error) {
         Alert.alert('Error', 'Ocurrio un error' + error)
@@ -27,18 +31,18 @@ export default function PrestamosComponent() {
   }
 
   useEffect(()=>{
-        getAhorros()
+        getPrestamos()
   }, [])
 
   return (
     <View style={styles.container}>
       
     <FlatList 
-      data={ahorros}
+      data={prestamos}
       keyExtractor={(item:MaestroCuentas) => item.id.toString()}
       renderItem={({item})=>(
         
-        <View style={styles.card}>
+        <View style={styles.cardPrestamos}>
             <Text>Producto: { item.descripcion_producto}</Text>
             <Text>Saldo Actual L. {item.saldo_total}</Text>
             <Text>Estado: {item.estatus_producto} </Text>
@@ -80,8 +84,8 @@ const styles = StyleSheet.create({
       marginBottom: 8,
       borderRadius: 4,
     },
-    card: {
-      //backgroundColor: '#fff',
+    cardPrestamos: {
+      backgroundColor: '#c58a90',
       padding: 16,
       marginBottom: 8,
       borderRadius: 4,
