@@ -1,4 +1,4 @@
-import { View, Text, TextInput, StyleSheet, SafeAreaView, TouchableOpacity, Alert } from 'react-native'
+import { View, Text, TextInput, StyleSheet, SafeAreaView, TouchableOpacity, Alert, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import CambioPIN from './CambioPIN'
@@ -53,6 +53,7 @@ export default function Login() {
             alert('Inicio de sesión exitoso');
             navigation.navigate('Aplicacion');
 
+
           }
 
         }
@@ -69,6 +70,10 @@ export default function Login() {
   return (
 
       <SafeAreaView style={styles.container}>
+        <Image 
+        source={require('../assets/LogoCooperativa.png')} 
+        style={styles.logo} 
+      />
       <Text style={styles.header}>Bienvenido</Text>
       <TextInput placeholder='Numero de Celular' style={styles.input} value={celular} onChangeText={setCelular}></TextInput>
       <TextInput placeholder='PIN' value={PIN} style={styles.input} onChangeText={setPIN} secureTextEntry></TextInput>
@@ -114,5 +119,11 @@ const styles = StyleSheet.create({
       color: '#fff', 
       fontSize: 18,
       fontWeight: 'bold',
+    },
+    logo: {
+      width: 100, 
+      height: 100, 
+      alignSelf: 'center', 
+      marginBottom: 20,
     },
   });

@@ -28,6 +28,7 @@ export default function Tabbar() {
               <Ionicons name="person" size={size}  color={color} /> 
             ),
           }}/>
+          
         </tab.Navigator>
 
   )
