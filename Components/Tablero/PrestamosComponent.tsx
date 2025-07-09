@@ -114,7 +114,7 @@ export default function PrestamosComponent() {
             
                         {/* Botón para cerrar el modal */}
                         <Button 
-                          title="Cerrar Modal" 
+                          title="Cerrar" 
                           onPress={() => setModalVisible(false)} 
                         />
                       </View>

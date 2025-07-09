@@ -36,7 +36,7 @@ export default function AhorrosComponent() {
     getAhorros();
   }, []);
 
-  ///////////////
+
   const getDetalles = async (nroProducto: number) => {
     try {
       const response = await api.get("MovtoAhorros");
@@ -120,7 +120,7 @@ export default function AhorrosComponent() {
                   />
 
                   <Button
-                    title="Cerrar Modal"
+                    title="Cerrar"
                     onPress={() => setModalVisible(false)}
                   />
                 </View>
